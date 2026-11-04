@@ -1,0 +1,29 @@
+services:
+  # ── Backend API ──
+  - type: web
+    name: chandu-cafeteria-api
+    runtime: python
+    plan: free
+    rootDir: backend
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn app.main:app --host 0.0.0.0 --port ${PORT:-8000} --workers 2
+    envVars:
+      - key: MONGO_URI
+        sync: false  # set manually — your MongoDB Atlas connection string
+      - key: JWT_SECRET_KEY
+        sync: false
+      - key: JWT_ALGORITHM
+        value: HS256
+      - key: JWT_EXPIRE_MINUTES
+        value: "480"
+
+  # ── Frontend (static site) ──
+  - type: static
+    name: chandu-cafeteria-frontend
+    plan: free
+    rootDir: frontend
+    buildCommand: npm install && npm run build
+    publishPath: dist
+    envVars:
+      - key: VITE_API_URL
+        value: https://chandu-cafeteria-api.onrender.com

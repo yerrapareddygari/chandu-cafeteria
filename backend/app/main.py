@@ -8,18 +8,10 @@ app = FastAPI(title="Chandu Cafeteria API", version="1.0.0")
 # Rate limiting — applied first, acts on all requests
 app.middleware("http")(rate_limiter)
 
-# CORS — allow production domain
+# CORS — allow all origins in production (frontend on Render static site)
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[
-        "http://localhost:5173",
-        "http://127.0.0.1:5173",
-        "http://localhost",
-        "http://127.0.0.1",
-        "http://localhost:3000",
-        "http://localhost:80",
-        "*",  # Allow all in dev/proxy behind Nginx
-    ],
+    allow_origins=["*"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],

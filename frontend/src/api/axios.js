@@ -1,7 +1,9 @@
 import axios from "axios";
 
 const api = axios.create({
-  baseURL: "/api",
+  // In dev, Vite proxes /api to localhost:8000
+  // In production, set VITE_API_URL env var (e.g. https://chandu-cafeteria-api.onrender.com)
+  baseURL: import.meta.env.VITE_API_URL || "/api",
   headers: { "Content-Type": "application/json" },
 });
 

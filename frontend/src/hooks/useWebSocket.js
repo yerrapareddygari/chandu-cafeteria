@@ -7,9 +7,14 @@ let listeners = [];
 let reconnectTimer = null;
 
 function getWsUrl() {
+  const apiBase = import.meta.env.VITE_API_URL
+    ? import.meta.env.VITE_API_URL.replace(/^http/, "ws")
+    : "";
   const protocol = window.location.protocol === "https:" ? "wss:" : "ws:";
   const host = window.location.host;
-  return `${protocol}//${host}/api/ws/notifications`;
+  return apiBase
+    ? `${apiBase}/ws/notifications`
+    : `${protocol}//${host}/api/ws/notifications`;
 }
 
 function connect(userId) {
