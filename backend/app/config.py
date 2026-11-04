@@ -3,7 +3,7 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-MONGO_URI = os.getenv("MONGO_URI", "mongodb://localhost:27017/kpit_cafeteria")
+MONGO_URI = os.getenv("MONGO_URI", "mongodb://localhost:27017/chandu-cafeteria")
 JWT_SECRET_KEY = os.getenv("JWT_SECRET_KEY", "kpit-cafeteria-secret-change-in-production")
 JWT_ALGORITHM = os.getenv("JWT_ALGORITHM", "HS256")
 JWT_EXPIRE_MINUTES = int(os.getenv("JWT_EXPIRE_MINUTES", "480"))
