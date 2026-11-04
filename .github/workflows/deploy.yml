@@ -20,6 +20,7 @@ jobs:
   backend:
     name: Backend — Build & Push
     runs-on: ubuntu-latest
+    environment: production
     steps:
       - uses: actions/checkout@v4
 
@@ -45,6 +46,7 @@ jobs:
   frontend:
     name: Frontend — Build & Push
     runs-on: ubuntu-latest
+    environment: production
     steps:
       - uses: actions/checkout@v4
 
