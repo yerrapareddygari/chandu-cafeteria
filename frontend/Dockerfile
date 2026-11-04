@@ -5,7 +5,7 @@ WORKDIR /app
 COPY package.json package-lock.json ./
 RUN npm ci --silent
 COPY . .
-ARG VITE_API_URL=
+ARG VITE_API_URL=https://chandu-cafeteria.onrender.com
 ENV VITE_API_URL=${VITE_API_URL}
 RUN npm run build
 
@@ -24,11 +24,6 @@ RUN echo 'server { \
     location /health { \
         return 200 "ok"; \
         add_header Content-Type text/plain; \
-    } \
-    location /api/ { \
-        proxy_pass https://chandu-cafeteria.onrender.com; \
-        proxy_set_header Host $host; \
-        proxy_set_header X-Real-IP $remote_addr; \
     } \
     location / { \
         try_files $uri $uri/ /index.html; \
